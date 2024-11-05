@@ -1,3 +1,4 @@
+import random
 import socket
 import threading
 import time
@@ -42,6 +43,7 @@ def master_node():
                     slave_socket.connect(address)
                     slave_socket.sendall("GET_TIME".encode())
                     slave_time = float(slave_socket.recv(1024).decode())
+                    time.sleep(random.uniform(0.5, 1.5)) # retraso para que el resultado sea más realista
                     time_diff = slave_time - get_current_time()
                     time_diffs.append(time_diff)
                     print(f"Tiempo recibido de {name}: {slave_time}, Diferencia: {time_diff:.2f}")
